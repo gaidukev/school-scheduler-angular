@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Add Class</h2>
+<mat-dialog-content>
+    <mat-form-field>
+        <mat-label>Class Name</mat-label>
+        <input matInput [(ngModel)]="className">
+    </mat-form-field>
+    <p>Start date: </p>
+    <app-datepicker (dateEvent)="newStartDate.set($event)"></app-datepicker>
+    <p>End date: </p>
+    <app-datepicker (dateEvent)="newEndDate.set($event)"></app-datepicker>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-flat-button (click)="onNoClick()">Done</button>
+</mat-dialog-actions>
