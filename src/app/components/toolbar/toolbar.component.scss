@@ -1,0 +1,20 @@
+@import "../../../custom-colors.scss";
+
+#toolbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: $c3;
+}
+
+#app-title {
+    color: $c8;
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 30px;
+}
+
+// button {
+//     color: $c8;
+// }

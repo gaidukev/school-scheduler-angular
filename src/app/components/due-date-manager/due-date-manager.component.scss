@@ -1,0 +1,64 @@
+@import "../../../custom-colors.scss";
+
+.list-item-info-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.list {
+    padding: 0 20px;
+}
+
+.list-item-date {
+    color: $c1;
+}
+
+.list-item {
+    margin: 20px 0;
+    border-radius: 10px;
+    box-shadow: 0px 1px 2px grey;
+}
+.list-item-title {
+    color: $c1;
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 30px;
+}
+
+.list-button {
+    background-color: $c1;
+    color: $c7;
+    border-radius: 25px;
+    height: 40px;
+    padding: 0 12px;
+    margin-bottom: 10px;
+    margin-right: 5px;
+}
+
+.add-task-icon {
+    color: darkslategray;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.add-task-form-field{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+}
+
+mat-expansion-panel {
+    margin-bottom: 10px;
+}

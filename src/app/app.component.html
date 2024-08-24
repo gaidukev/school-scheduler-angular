@@ -1,30 +1,3 @@
-<mat-toolbar>
-  <mat-toolbar-row id="toolbar">
-    <h1>School Scheduler</h1>
-    <span class="links">
-      <a>Class list</a>
-      |
-      <a>Calendar</a>
-      |
-      <a>Achievement History</a>
-    </span>
-  </mat-toolbar-row>
-</mat-toolbar>
+<app-toolbar></app-toolbar>
 
-<div class="example-button-container">
-
-  <mat-list>
-    @for(className of classes(); track className.id) {
-      <mat-list-item style="height: auto;">
-        <h2>{{className.name}}</h2> 
-        <p>From: {{className.startDate}}</p>
-        <p>To: {{className.endDate}}</p>
-      </mat-list-item>
-    }
-  </mat-list>
-  
-  <button mat-fab extended (click)="openDialog()">
-    Add class
-  </button>
-</div>
 <router-outlet />

@@ -43,7 +43,7 @@ export class AddClassDialogComponent {
   className = signal("");
 
   onNoClick(): void {
-    this.classesService.addClass(this.newStartDate(), this.newEndDate(), this.className());
+    this.classesService.addClass(this.newStartDate(), this.newEndDate(), this.className(), "", 0);
     this.dialogRef.close()
   }
 

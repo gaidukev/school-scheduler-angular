@@ -1,0 +1,42 @@
+<mat-list class="list">
+    <mat-accordion>
+    @for(dueDate of dueDates(); track dueDate.id){
+        <mat-list-item class="list-item" style="height: auto">
+            <h2 class="list-item-title">{{dueDate.title}}</h2>
+            <span class="list-item-info-container">
+                <p class="list-item-date">{{dueDate.date}}</p>
+                <p class="list-item-date">{{dueDate.subject}}</p>
+                <p>Weight: {{dueDate.weight}}%</p>
+            </span>
+            <p>{{dueDate.description}}</p>
+            <mat-expansion-panel
+                (closed) = "newTask = ''">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>To do</mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="task-list">
+                    @for(task of dueDate.tasks; track task){
+                        <mat-checkbox [checked]='task.complete'>{{task.description}}</mat-checkbox>
+                    }
+                    <div class="add-task-form-field">
+                        <mat-icon class="add-task-icon"
+                            (click)="addNewTask(dueDate.id)">add_circle</mat-icon>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="newTask">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+
+            <span class="list-item-buttons">
+                <button mat-button class="list-button">Mark complete</button>
+                <button mat-button class="list-button">Edit</button>
+            </span>
+
+        </mat-list-item>
+    }
+    </mat-accordion>
+    <button mat-button class="list-button" extended>
+        Add a due date
+    </button>
+</mat-list>
