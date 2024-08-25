@@ -4,7 +4,7 @@
         <mat-list-item class="list-item" style="height: auto">
             <h2 class="list-item-title">{{dueDate.title}}</h2>
             <span class="list-item-info-container">
-                <p class="list-item-date">{{dueDate.date}}</p>
+                <p class="list-item-date">{{dueDate.date.toDateString()}}</p>
                 <p class="list-item-date">{{dueDate.subject}}</p>
                 <p>Weight: {{dueDate.weight}}%</p>
             </span>
@@ -30,13 +30,13 @@
 
             <span class="list-item-buttons">
                 <button mat-button class="list-button">Mark complete</button>
-                <button mat-button class="list-button">Edit</button>
+                <button mat-button class="list-button" (click)="openDialogEdit(dueDate)">Edit</button>
             </span>
 
         </mat-list-item>
     }
     </mat-accordion>
-    <button mat-button class="list-button" extended>
+    <button mat-button class="list-button" extended (click)="openDialog()">
         Add a due date
     </button>
 </mat-list>

@@ -5,8 +5,8 @@
         <mat-list-item class="list-item" style="height: auto;">
           <h2 class="list-item-title">{{className.name}}</h2> 
           <span class="list-item-info-container">
-            <p class="list-item-date">From: {{className.startDate}}</p>
-            <p class="list-item-date">To: {{className.endDate}}</p>
+            <p class="list-item-date">From: {{className.startDate.toDateString()}}</p>
+            <p class="list-item-date">To: {{className.endDate.toDateString()}}</p>
             <p>{{className.teacher}}</p>
             <p>Room {{className.room}}</p>
             <p>Syllabus</p>

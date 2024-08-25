@@ -2,7 +2,7 @@ import { Injectable, signal } from '@angular/core';
 
 export type DueDate = {
   id: number,
-  date: string,
+  date: Date,
   title: string,
   description: string,
   subject: string,
@@ -22,7 +22,7 @@ export class DueDatesService {
   #dueDates = signal<DueDate[]>([
     {
       id: 0,
-      date: "2001-03-30",
+      date: new Date(2001, 2, 30),
       title: "Research writeup",
       description: "Make sure to include citations and format the figures properly",
       subject: "Biology",
@@ -43,7 +43,7 @@ export class DueDatesService {
     },
     {
       id: 1,
-      date: "2001-03-30",
+      date: new Date(2001, 2, 30),
       title: "Math assignment",
       description: "U4: Trigonometry",
       subject: "Math",
@@ -57,7 +57,7 @@ export class DueDatesService {
     },
     {
       id: 2,
-      date: "2001-03-30",
+      date: new Date(2001, 2, 30),
       title: "Essay personal statement",
       subject: "English",
       description: "",
@@ -76,20 +76,45 @@ export class DueDatesService {
   ])
   dueDates = this.#dueDates.asReadonly();
 
-  addDueDate(date: string, title: string, subject:string, description: string, weight: number){
+  getNewId(){
+    return this.#dueDates().length;
+  }
+
+  addDueDate(id:number, date: Date, title: string, subject:string, description: string, weight: number){
+    console.log("THIS DUE DATES: ", this.#dueDates(), id)
     this.#dueDates.update((oldDueDates) => {
-      const newId = this.#dueDates.length;
-      return [...oldDueDates,
-        {
-          id: newId,
-          date: date,
-          title: title,
-          description: description,
-          weight: weight,
-          subject: subject,
-          tasks: []
-        }]
-    })
+      if (id < this.#dueDates().length){
+        return oldDueDates.map((dueDate) => {
+          if (dueDate.id == id) {
+            return {
+              id: id,
+              date: date, 
+              title: title,
+              description: description,
+              weight: weight,
+              subject: subject,
+              tasks: dueDate.tasks
+            }
+          } else {
+            return dueDate
+          }
+        })
+      } else {
+        return [...oldDueDates,
+          {
+            id: id,
+            date: date,
+            title: title,
+            description: description,
+            weight: weight,
+            subject: subject,
+            tasks: []
+          }]
+      }
+
+      })
+
+      
   }
 
   removeDueDate(id: number){

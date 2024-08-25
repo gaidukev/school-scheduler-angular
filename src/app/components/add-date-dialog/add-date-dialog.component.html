@@ -1,0 +1,40 @@
+<h2 mat-dialog-title>Add due date</h2>
+<mat-dialog-content>
+    <div class="field-input">
+        <p>Title</p>
+        <mat-form-field>
+            <input matInput [(ngModel)]="newTitle">
+        </mat-form-field>
+    </div>
+    <div class="field-input">
+        <p>Description</p>
+        <mat-form-field>
+            <textarea matInput [(ngModel)]="newDescription"></textarea>
+        </mat-form-field>
+    </div>
+    <div class="field-input">
+        <p>Weight</p>
+        <mat-form-field>
+            <input matInput [(ngModel)]="newWeight">
+        </mat-form-field>
+    </div>
+    <div class="field-input">
+        <p>Due date</p>
+        <app-datepicker (dateEvent)="updateDate($event)" [initialDate]="newDate"></app-datepicker>
+    </div>
+    <div class="field-input">
+        <p>Subject</p>
+        <mat-form-field>
+            <mat-select [(value)]="newSubject">
+                @for (class of classes(); track class) {
+                    <mat-option [value]="class.name">{{class.name}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <mat-icon 
+            matTooltip="Add a class in order to add due dates for that class">help</mat-icon>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-flat-button (click)="onNoClick()">Done</button>
+</mat-dialog-actions>

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Output, EventEmitter} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Output, EventEmitter, Input} from '@angular/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -14,10 +14,11 @@ import {provideNativeDateAdapter} from '@angular/material/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatepickerComponent {
-  @Output() dateEvent = new EventEmitter<string>();
+  @Input() initialDate = new Date(2024, 7, 31);
+  @Output() dateEvent = new EventEmitter<Date>();
 
   addDate(date: string){
-    this.dateEvent.emit(date)
+    this.dateEvent.emit(new Date(date))
   }
 
 }

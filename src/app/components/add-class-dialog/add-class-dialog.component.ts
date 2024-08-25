@@ -38,12 +38,14 @@ import { ClassesService } from '../../services/classes.service';
 export class AddClassDialogComponent {
   readonly dialogRef = inject(MatDialogRef<AddClassDialogComponent>);
   classesService = inject(ClassesService);
-  newStartDate = signal("1990-01-01");
-  newEndDate = signal("1990-04-20");
-  className = signal("");
+  newStartDate = new Date(1990, 0, 1);
+  newEndDate = new Date(1990, 3, 20);
+  className = "";
+  teacherName = "";
+  roomNumber = 0;
 
   onNoClick(): void {
-    this.classesService.addClass(this.newStartDate(), this.newEndDate(), this.className(), "", 0);
+    this.classesService.addClass(this.newStartDate, this.newEndDate, this.className, this.teacherName, this.roomNumber);
     this.dialogRef.close()
   }
 
