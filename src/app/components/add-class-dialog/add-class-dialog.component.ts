@@ -64,8 +64,10 @@ export class AddClassDialogComponent {
   onNoClick(): void {
     
 
-    this.classesService.addClass(0, this.className, this.teacherName, this.roomNumber);
-    this.dialogRef.close()
+    if (this.selectedSemester != -1) {
+      this.classesService.addClass(0, this.className, this.teacherName, this.roomNumber);
+      this.dialogRef.close()
+    }
   }
 
 

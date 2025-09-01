@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { DatePipe, CommonModule  } from '@angular/common';
+import { AddSemesterDialogComponent } from '../add-semester-dialog/add-semester-dialog.component';
 
 @Component({
   selector: 'app-class-list',
@@ -40,6 +41,15 @@ export class ClassListComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log("The add class dialog was closed!");
+    })
+  }
+
+  onAddSemester(): void {
+
+    const dialogRef = this.dialog.open(AddSemesterDialogComponent, {data: {}, "minWidth": "50%" });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("The add semester dialog has been closed!")
     })
   }
 
