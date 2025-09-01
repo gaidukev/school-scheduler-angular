@@ -4,11 +4,12 @@ import { MatListModule } from '@angular/material/list';
 import { ClassesService } from '../../services/classes.service';
 import {MatDialog} from '@angular/material/dialog';
 import { AddClassDialogComponent } from '../add-class-dialog/add-class-dialog.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-class-list',
   standalone: true,
-  imports: [MatButtonModule, MatListModule],
+  imports: [MatButtonModule, MatListModule, MatIconModule],
   templateUrl: './class-list.component.html',
   styleUrl: './class-list.component.scss'
 })

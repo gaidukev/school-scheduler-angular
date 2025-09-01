@@ -45,7 +45,7 @@ export class AddClassDialogComponent {
   roomNumber = 0;
 
   onNoClick(): void {
-    this.classesService.addClass(this.newStartDate, this.newEndDate, this.className, this.teacherName, this.roomNumber);
+    this.classesService.addClass(0, this.className, this.teacherName, this.roomNumber);
     this.dialogRef.close()
   }
 

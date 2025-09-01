@@ -11,7 +11,7 @@
 }
 
 .list-item-date {
-    color: $c1;
+    color: var(--text-muted);
 }
 
 .list-item {
@@ -20,7 +20,7 @@
     box-shadow: 0px 1px 2px grey;
 }
 .list-item-title {
-    color: $c1;
+    color: var(--text-alternate);
     font-family: "Oswald", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -29,8 +29,8 @@
 }
 
 .list-button {
-    background-color: $c1;
-    color: $c7;
+    background-color: var(--text-alternate);
+    color: var(--button-color);
     border-radius: 25px;
     height: 40px;
     padding: 0 12px;

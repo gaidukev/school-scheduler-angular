@@ -1,32 +1,26 @@
-<h2 mat-dialog-title>Add Class</h2>
-<mat-dialog-content>
-    <div class="field-input">
-        <p>Class name</p>
-        <mat-form-field>
-            <input matInput [(ngModel)]="className">
-        </mat-form-field>
-    </div>
-    <div class="field-input">
-        <p>Start date</p>
-        <app-datepicker (dateEvent)="newStartDate = $event"></app-datepicker>
-    </div>
-    <div class="field-input">
-        <p>End date</p>
-        <app-datepicker (dateEvent)="newEndDate = $event"></app-datepicker>
-    </div>
-    <div class="field-input">
-        <p>Teacher</p>
-        <mat-form-field>
-            <input matInput [(ngModel)]="teacherName">
-        </mat-form-field>
-    </div>
-    <div class="field-input">
-        <p>Room #</p>
-        <mat-form-field>
-            <input matInput [(ngModel)]="roomNumber">
-        </mat-form-field>
+<h2 mat-dialog-title class="dialog-title">Add Class</h2>
+<mat-dialog-content class="dialog-content">
+    <div class="form-container">
+        <div class="field-input">
+            <p class="field-label">Class name</p>
+            <mat-form-field appearance="outline">
+                <input matInput [(ngModel)]="className">
+            </mat-form-field>
+        </div>
+        <div class="field-input">
+            <p class="field-label">Teacher</p>
+            <mat-form-field appearance="outline">
+                <input matInput [(ngModel)]="teacherName">
+            </mat-form-field>
+        </div>
+        <div class="field-input">
+            <p class="field-label">Room #</p>
+            <mat-form-field appearance="outline">
+                <input matInput [(ngModel)]="roomNumber">
+            </mat-form-field>
+        </div>
     </div>
 </mat-dialog-content>
-<mat-dialog-actions>
+<mat-dialog-actions align="end">
     <button mat-flat-button (click)="onNoClick()">Done</button>
 </mat-dialog-actions>

@@ -2,22 +2,26 @@
 
     <mat-list class="list">
       @for(className of classes(); track className.id) {
-        <mat-list-item class="list-item" style="height: auto;">
-          <h2 class="list-item-title">{{className.name}}</h2> 
-          <span class="list-item-info-container">
-            <p class="list-item-date">From: {{className.startDate.toDateString()}}</p>
-            <p class="list-item-date">To: {{className.endDate.toDateString()}}</p>
-            <p>{{className.teacher}}</p>
-            <p>Room {{className.room}}</p>
-            <p>Syllabus</p>
-            <p>Report card</p>
-          </span>
+        <mat-list-item  style="height: auto;">
+          <div class="list-item class-info-container">
+            <div class="class-info-large">
+              <h2 class="list-item-title">{{className.name}}</h2> 
+              <p class="class-extra-data">{{className.teacher}} ● Room {{className.room}}</p>
+            </div>
+            <div class="class-info-icons">
+              <mat-icon>
+                menu_book
+              </mat-icon>
+              <mat-icon>
+                grading
+              </mat-icon>
+            </div>
+          </div>
         </mat-list-item>
       }
       <button mat-button class="list-button" extended (click)="openDialog()">
         Add class
       </button>
     </mat-list>
-    
 
   </div>

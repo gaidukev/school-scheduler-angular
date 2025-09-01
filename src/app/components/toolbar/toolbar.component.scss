@@ -3,11 +3,11 @@
 #toolbar {
     display: flex;
     justify-content: space-between;
-    background-color: $c3;
+    background-color: var(--toolbar-bg-color);
 }
 
 #app-title {
-    color: $c8;
+    color: var(--toolbar-text-color);
     font-family: "Oswald", sans-serif;
     font-optical-sizing: auto;
     font-weight: 500;
@@ -15,6 +15,7 @@
     font-size: 30px;
 }
 
-// button {
-//     color: $c8;
-// }
+#header-link {
+    color: inherit;
+    text-decoration: none;
+}
