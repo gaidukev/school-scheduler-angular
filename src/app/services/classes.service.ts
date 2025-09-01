@@ -17,22 +17,29 @@ export class ClassesService {
     {
       id: 0,
       semesterId: 0,
-      name: "English",
-      teacher: "Mrs. Harbold",
+      name: "ENGL 101",
+      teacher: "Dr. Sarah Harbold",
       room: 401
     },
     {
       id: 1,
       semesterId: 0,
-      name: "Math",
-      teacher: "Mrs. Olde",
+      name: "MATH 203",
+      teacher: "Dr. Katherine Olde",
       room: 105
     },
     {
       id: 2,
-      semesterId: 0,
-      name: "Biology",
-      teacher: "Mrs. Palinkas",
+      semesterId: 1,
+      name: "BIOL 100",
+      teacher: "Dr. Thomas Palinkas",
+      room: 106
+    },
+    {
+      id: 2,
+      semesterId: 2,
+      name: "BIOL 102",
+      teacher: "Dr. Thomas Palinkas",
       room: 106
     }
   ]);

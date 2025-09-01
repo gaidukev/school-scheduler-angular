@@ -1,12 +1,311 @@
-
+@use '@angular/material' as mat;
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @import "./custom-colors.scss";
 
 
+$basic-palette: (
+  50:  #E0F7F9,
+  100: #B3EBF0,
+  200: #80DEE7,
+  300: #4DD0DE,
+  400: #26C6D6,
+  500: #028090, 
+  600: #027381,
+  700: #026472,
+  800: #025662,
+  900: #013B45,
+  A100: #A7FFFF,
+  A200: #74FFFF,
+  A400: #41FFFF,
+  A700: #28FFFF,
+  contrast: (
+    50:  #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  )
+);
+
+
+$basic-primary: mat.define-palette($basic-palette);
+
+$basic-accent:  mat.define-palette(mat.$pink-palette, 500); // or your own
+$basic-warn:    mat.define-palette(mat.$red-palette);
+
+$basic-theme: mat.define-light-theme((
+  color: (
+    primary: $basic-primary,
+    accent: $basic-accent,
+    warn: $basic-warn,
+  )
+));
+
+
+$light-warm-palette: (
+  50:  #FFF3E0,
+  100: #FFE0B2,
+  200: #FFCC80,
+  300: #FFB74D,
+  400: #FFA726,
+  500: #D17C2F, 
+  600: #BF6C29,
+  700: #A65E24,
+  800: #8C4F1F,
+  900: #643718,
+  A100: #FFD180,
+  A200: #FFB74D,
+  A400: #FF9800,
+  A700: #F57C00,
+  contrast: (
+    50:  black,
+    100: black,
+    200: black,
+    300: black,
+    400: black,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: black,
+    A200: black,
+    A400: black,
+    A700: white,
+  )
+);
+
+
+$light-warm-primary: mat.define-palette($light-warm-palette);
+$light-warm-accent: mat.define-palette(mat.$orange-palette);
+$light-warm-warn: mat.define-palette(mat.$red-palette);
+$light-warm-theme: mat.define-light-theme((
+  color: (
+    primary: $light-warm-primary,
+    accent: $light-warm-accent,
+    warn: $light-warm-warn,
+  )
+));
+
+
+$playful-palette: (
+  50:  #FFF0F6,
+  100: #FFD6E8,
+  200: #FFB3D9,
+  300: #FF80C8,
+  400: #FF4DB8,
+  500: #FF4081, // main
+  600: #E73375,
+  700: #CC2668,
+  800: #B31A5C,
+  900: #801142,
+  A100: #FF80AB,
+  A200: #FF4081,
+  A400: #F50057,
+  A700: #C51162,
+  contrast: (
+    50:  black,
+    100: black,
+    200: black,
+    300: black,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: black,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+
+
+$playful-primary: mat.define-palette($playful-palette);
+$playful-accent: mat.define-palette(mat.$purple-palette);
+$playful-warn: mat.define-palette(mat.$red-palette);
+$playful-theme: mat.define-light-theme((
+  color: (
+    primary: $playful-primary,
+    accent: $playful-accent,
+    warn: $playful-warn,
+  )
+));
+
+
+$primary-colors-palette: (
+  50:  #E3F2FD,
+  100: #BBDEFB,
+  200: #90CAF9,
+  300: #64B5F6,
+  400: #42A5F5,
+  500: #1976D2, // main
+  600: #1565C0,
+  700: #0D47A1,
+  800: #0B3C8C,
+  900: #08306B,
+  A100: #82B1FF,
+  A200: #448AFF,
+  A400: #2979FF,
+  A700: #2962FF,
+  contrast: (
+    50:  black,
+    100: black,
+    200: black,
+    300: black,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: black,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+
+
+$primary-colors-primary: mat.define-palette($primary-colors-palette);
+$primary-colors-accent: mat.define-palette(mat.$green-palette);
+$primary-colors-warn: mat.define-palette(mat.$red-palette);
+$primary-colors-theme: mat.define-light-theme((
+  color: (
+    primary: $primary-colors-primary,
+    accent: $primary-colors-accent,
+    warn: $primary-colors-warn,
+  )
+));
+
+$dark-violet-palette: (
+  50:  #F3E5F5,
+  100: #E1BEE7,
+  200: #CE93D8,
+  300: #BA68C8,
+  400: #AB47BC,
+  500: #8E24AA, // main
+  600: #7B1FA2,
+  700: #6A1B9A,
+  800: #4A148C,
+  900: #3B0D76,
+  A100: #EA80FC,
+  A200: #E040FB,
+  A400: #D500F9,
+  A700: #AA00FF,
+  contrast: (
+    50:  black,
+    100: black,
+    200: black,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: black,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+
+
+$dark-violet-primary: mat.define-palette($dark-violet-palette);
+$dark-violet-accent: mat.define-palette(mat.$deep-purple-palette);
+$dark-violet-warn: mat.define-palette(mat.$red-palette);
+$dark-violet-theme: mat.define-dark-theme((
+  color: (
+    primary: $dark-violet-primary,
+    accent: $dark-violet-accent,
+    warn: $dark-violet-warn,
+  )
+));
+
+$dark-cyberpunk-palette: (
+  50:  #E0FFFF,
+  100: #B3FFFF,
+  200: #80FFFF,
+  300: #4DFFFF,
+  400: #26FFFF,
+  500: #00E5FF, // main
+  600: #00C1CC,
+  700: #0099A3,
+  800: #007374,
+  900: #004D4B,
+  A100: #84FFFF,
+  A200: #1DE9B6,
+  A400: #00E5FF,
+  A700: #00B8D4,
+  contrast: (
+    50:  black,
+    100: black,
+    200: black,
+    300: black,
+    400: black,
+    500: black,
+    600: black,
+    700: black,
+    800: white,
+    900: white,
+    A100: black,
+    A200: black,
+    A400: black,
+    A700: black,
+  )
+);
+
+
+$dark-cyberpunk-primary: mat.define-palette($dark-cyberpunk-palette);
+$dark-cyberpunk-accent: mat.define-palette(mat.$pink-palette);
+$dark-cyberpunk-warn: mat.define-palette(mat.$red-palette);
+$dark-cyberpunk-theme: mat.define-dark-theme((
+  color: (
+    primary: $dark-cyberpunk-primary,
+    accent: $dark-cyberpunk-accent,
+    warn: $dark-cyberpunk-warn,
+  )
+));
+
+
+.theme-light-warm {
+  @include mat.all-component-colors($light-warm-theme);
+}
+
+.theme-playful {
+  @include mat.all-component-colors($playful-theme);
+}
+
+.theme-primary-colors {
+  @include mat.all-component-colors($primary-colors-theme);
+}
+
+.theme-dark-violet {
+  @include mat.all-component-colors($dark-violet-theme);
+}
+
+.theme-dark-cyberpunk {
+  @include mat.all-component-colors($dark-cyberpunk-theme);
+}
+
+
+
 
 :root {
+    @include mat.all-component-colors($basic-theme);
     --background: #FFFFFF;
     --surface: #f7f9f9; /* cards, panels */
     --surface-alt: #FEFFF5;
@@ -27,7 +326,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     --accent-primary: #028090;
     --accent-secondary: #02C39A;
     
-    --mdc-outlined-text-field-focus-outline-color: #02C39A;
 
 }
 
