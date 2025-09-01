@@ -10,9 +10,34 @@ p {
     margin-right: 8px;
 }
 
+.dialog-container {
+    background: var(--surface-alt);
+    
+}
 
 mat-dialog-content {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.dialog-button {
+    background-color: var(--button-color);
+    color: var(--button-text-color);
+}
+
+.dialog-title {
+    color: var(--text-alternate);
+}
+
+.field-label {
+    color: var(--text-muted);
+}
+
+.form-container {
+    width: 100%;
+}
+
+mat-form-field {
+    width: 65%;
 }

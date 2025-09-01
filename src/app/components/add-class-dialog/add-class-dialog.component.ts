@@ -3,6 +3,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
+import { MatOption } from '@angular/material/core';
+import { MatSelect } from '@angular/material/select';
 import {
   MatDialogActions,
   MatDialogClose,
@@ -14,6 +16,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { DatepickerComponent } from '../datepicker/datepicker.component';
 import { ClassesService } from '../../services/classes.service';
+import { SemestersService } from '../../services/semesters.service';
+import { DatePipe, CommonModule  } from '@angular/common';
 
 @Component({
   selector: 'app-add-class-dialog',
@@ -29,7 +33,11 @@ import { ClassesService } from '../../services/classes.service';
     MatDialogActions,
     MatDialogClose,
     MatDatepickerModule,
-    DatepickerComponent
+    DatepickerComponent,
+    MatOption,
+    MatSelect,
+    DatePipe,
+    CommonModule
 ],
   templateUrl: './add-class-dialog.component.html',
   styleUrl: './add-class-dialog.component.scss',
@@ -38,13 +46,24 @@ import { ClassesService } from '../../services/classes.service';
 export class AddClassDialogComponent {
   readonly dialogRef = inject(MatDialogRef<AddClassDialogComponent>);
   classesService = inject(ClassesService);
-  newStartDate = new Date(1990, 0, 1);
-  newEndDate = new Date(1990, 3, 20);
+  semestersService = inject(SemestersService);
+
+  semesterOptions = this.semestersService.semesters;
+
+  ngOnInit() {
+    console.log('Semester options:', this.semesterOptions);
+  }
+
+
+  selectedSemester = -1;
+
   className = "";
   teacherName = "";
   roomNumber = 0;
 
   onNoClick(): void {
+    
+
     this.classesService.addClass(0, this.className, this.teacherName, this.roomNumber);
     this.dialogRef.close()
   }

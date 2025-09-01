@@ -1,26 +1,51 @@
-<h2 mat-dialog-title class="dialog-title">Add Class</h2>
-<mat-dialog-content class="dialog-content">
-    <div class="form-container">
-        <div class="field-input">
-            <p class="field-label">Class name</p>
-            <mat-form-field appearance="outline">
-                <input matInput [(ngModel)]="className">
-            </mat-form-field>
+<div class="dialog-container">
+
+    <h2 mat-dialog-title class="dialog-title" >Add Class</h2>
+    <mat-dialog-content class="dialog-content" >
+        <div class="form-container">
+            <div class="field-input">
+                <p class="field-label">Class</p>
+                <mat-form-field appearance="outline">
+                    <input matInput [(ngModel)]="className">
+                </mat-form-field>
+            </div>
+
+            <div class="field-input">
+                <p class="field-label">Semester</p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Select a semester</mat-label>
+                    <mat-select  [(ngModel)]="selectedSemester" name="semester">
+                    <mat-option value=-1 disabled>-- Choose a semester --</mat-option>
+                    <mat-option *ngFor="let sem of semesterOptions()" [value]="sem.id">
+                        {{ sem.dateFrom | date:'MMMM d, y' }} - {{ sem.dateTo | date:'MMMM d, y' }}
+                    </mat-option>
+
+                     <!-- <mat-option *ngFor="let sem of semesterOptions" [value]="sem.value">
+                    {{ sem.label }}
+                    </mat-option> -->
+
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="field-input">
+                <p class="field-label">Teacher</p>
+                <mat-form-field appearance="outline">
+                    <input matInput [(ngModel)]="teacherName">
+                </mat-form-field>
+            </div>
+            <div class="field-input">
+                <p class="field-label">Room #</p>
+                <mat-form-field appearance="outline">
+                    <input matInput [(ngModel)]="roomNumber">
+                </mat-form-field>
+            </div>
         </div>
-        <div class="field-input">
-            <p class="field-label">Teacher</p>
-            <mat-form-field appearance="outline">
-                <input matInput [(ngModel)]="teacherName">
-            </mat-form-field>
-        </div>
-        <div class="field-input">
-            <p class="field-label">Room #</p>
-            <mat-form-field appearance="outline">
-                <input matInput [(ngModel)]="roomNumber">
-            </mat-form-field>
-        </div>
-    </div>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-    <button mat-flat-button (click)="onNoClick()">Done</button>
-</mat-dialog-actions>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button class="dialog-button" mat-flat-button (click)="onNoClick()">Done</button>
+    </mat-dialog-actions>
+
+
+</div>
+

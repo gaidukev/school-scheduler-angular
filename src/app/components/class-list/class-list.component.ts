@@ -20,7 +20,7 @@ export class ClassListComponent {
   readonly dialog = inject(MatDialog);
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(AddClassDialogComponent, {data: {}});
+    const dialogRef = this.dialog.open(AddClassDialogComponent, {data: {}, "minWidth": "50%" });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log("The add class dialog was closed!");

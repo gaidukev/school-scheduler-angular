@@ -15,18 +15,18 @@ export class SemestersService {
   #semesters = signal([
     {
       id: 0,
-      dateFrom: new Date(2001, 1, 1),
-      dateTo: new Date(2001, 4, 30)
+      dateFrom: new Date(2001, 0, 1),
+      dateTo: new Date(2001, 3, 30)
     },
     {
       id: 1,
-      dateFrom: new Date(2001, 9, 1),
-      dateTo: new Date(2001, 12, 31)
+      dateFrom: new Date(2001, 0, 1),
+      dateTo: new Date(2001, 11, 31)
     }, 
     {
       id: 3,
-      dateFrom: new Date(2002, 1, 1),
-      dateTo: new Date(2002, 4, 30)
+      dateFrom: new Date(2002, 0, 1),
+      dateTo: new Date(2002, 3, 30)
     }
   ])
 
