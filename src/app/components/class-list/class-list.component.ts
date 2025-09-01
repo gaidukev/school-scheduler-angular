@@ -1,8 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal, computed } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
-import { ClassesService } from '../../services/classes.service';
-import { SemestersService } from '../../services/semesters.service';
+import { ClassesService, Class } from '../../services/classes.service';
+import { SemestersService, Semester } from '../../services/semesters.service';
 import {MatDialog} from '@angular/material/dialog';
 import { AddClassDialogComponent } from '../add-class-dialog/add-class-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
@@ -27,7 +27,11 @@ export class ClassListComponent {
   classes = this.classesService.classes;
   semesterOptions = this.semestersService.semesters;
 
-  selectedSemester = 0;
+  selectedSemester = signal<number>(0);
+
+  filteredClasses = computed(() => {
+    return this.classes().filter((el) => el.semesterId == this.selectedSemester())
+  })
 
   readonly dialog = inject(MatDialog);
 

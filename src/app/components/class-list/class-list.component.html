@@ -12,7 +12,7 @@
 
 
     <mat-list class="list">
-      @for(className of classes(); track className.id) {
+      @for(className of filteredClasses(); track className.id) {
         <mat-list-item  style="height: auto; max-width: 500px;">
           <div class="list-item class-info-container">
             <div class="class-info-large">
