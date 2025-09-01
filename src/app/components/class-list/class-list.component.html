@@ -1,8 +1,8 @@
-<div class="button-container">
+<div class="content-container">
 
     <mat-list class="list">
       @for(className of classes(); track className.id) {
-        <mat-list-item  style="height: auto;">
+        <mat-list-item  style="height: auto; max-width: 500px;">
           <div class="list-item class-info-container">
             <div class="class-info-large">
               <h2 class="list-item-title">{{className.name}}</h2> 
@@ -19,9 +19,13 @@
           </div>
         </mat-list-item>
       }
+    </mat-list>
+
+    <div class="button-container">
       <button mat-button class="list-button" extended (click)="openDialog()">
         Add class
       </button>
-    </mat-list>
+
+    </div>
 
   </div>
