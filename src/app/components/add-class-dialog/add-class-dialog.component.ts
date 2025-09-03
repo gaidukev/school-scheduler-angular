@@ -66,7 +66,7 @@ export class AddClassDialogComponent {
 
   className = "";
   teacherName = "";
-  roomNumber = 0;
+  roomNumber = "";
 
   onNoClick(): void {
 

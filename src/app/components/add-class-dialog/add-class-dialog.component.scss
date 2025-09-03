@@ -11,7 +11,7 @@ p {
 }
 
 .dialog-container {
-    background: var(--surface-alt);
+    background: var(--surface);
     
 }
 
@@ -46,8 +46,29 @@ mat-form-field {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    position: relative;
+
 }
 
 #cancel-dialog-button {
     margin: 5px;
+    // position: absolute;
+    // top: 0;
+    // right: 0;
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+}
+
+#dialog-title-left {
+    text-align: left;
+    flex: 1;
+
+    color: var(--text-alternate);
+}
+
+#dialog-title-right {
+    text-align: right;
+    flex: 1;
+
+    color: var(--text-alternate);
 }

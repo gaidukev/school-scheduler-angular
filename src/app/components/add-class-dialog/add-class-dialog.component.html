@@ -1,16 +1,14 @@
 <div class="dialog-container">
 
     <div id="dialog-header">
-        <h2 mat-dialog-title class="dialog-title" >Add Class</h2>
+        <h2 mat-dialog-title id="dialog-title-left" >Add Class</h2>
+        <h2 mat-dialog-title id="dialog-title-right" >{{ this.data.selectedSemester.dateFrom | date:'y MMM d' }} - {{ this.data.selectedSemester.dateTo | date:'y MMM d' }}</h2>
         <button mat-icon-button mat-dialog-close id="cancel-dialog-button">
             <mat-icon>close</mat-icon>
         </button>
 
     </div>
     <mat-dialog-content class="dialog-content" >
-        <p>{{ this.data.selectedSemester.dateFrom | date:'y MMM d' }} - {{ this.data.selectedSemester.dateTo | date:'y MMM d' }}</p>
-
-
         <div class="form-container">
             <div class="field-input">
                 <p class="field-label">Class</p>
@@ -25,7 +23,7 @@
                 </mat-form-field>
             </div>
             <div class="field-input">
-                <p class="field-label">Room #</p>
+                <p class="field-label">Room</p>
                 <mat-form-field appearance="outline">
                     <input matInput [(ngModel)]="roomNumber">
                 </mat-form-field>
