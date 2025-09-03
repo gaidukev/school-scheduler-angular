@@ -10,14 +10,17 @@ import {
   MatDialogClose,
   MatDialogContent,
   MatDialogTitle,
-  MatDialogRef
+  MatDialogRef,
+  MAT_DIALOG_DATA
 } from '@angular/material/dialog';
+import { OnInit } from '@angular/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { DatepickerComponent } from '../datepicker/datepicker.component';
 import { ClassesService } from '../../services/classes.service';
-import { SemestersService } from '../../services/semesters.service';
 import { DatePipe, CommonModule  } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { Semester } from '../../services/semesters.service';
 
 @Component({
   selector: 'app-add-class-dialog',
@@ -37,7 +40,8 @@ import { DatePipe, CommonModule  } from '@angular/common';
     MatOption,
     MatSelect,
     DatePipe,
-    CommonModule
+    CommonModule,
+    MatIconModule,
 ],
   templateUrl: './add-class-dialog.component.html',
   styleUrl: './add-class-dialog.component.scss',
@@ -46,28 +50,31 @@ import { DatePipe, CommonModule  } from '@angular/common';
 export class AddClassDialogComponent {
   readonly dialogRef = inject(MatDialogRef<AddClassDialogComponent>);
   classesService = inject(ClassesService);
-  semestersService = inject(SemestersService);
 
-  semesterOptions = this.semestersService.semesters;
+  readonly data = inject(MAT_DIALOG_DATA) as { selectedSemester: Semester };
 
-  ngOnInit() {
-    console.log('Semester options:', this.semesterOptions);
+  ngOnInit(): void {
+    console.log("Semester: ", JSON.stringify(this.data), JSON.stringify(this.data.selectedSemester));
+  }
+
+  formatSemester(): String {
+    return `${new Date(this.data.selectedSemester.dateFrom).toLocaleString('y MMM d')} - ${new Date(this.data.selectedSemester.dateTo).toLocaleString('y MMM d')}`
   }
 
 
-  selectedSemester = -1;
+
 
   className = "";
   teacherName = "";
   roomNumber = 0;
 
   onNoClick(): void {
+
+    console.log("SEMESTER ID: ", this.data.selectedSemester.id)
     
 
-    if (this.selectedSemester != -1) {
-      this.classesService.addClass(0, this.className, this.teacherName, this.roomNumber);
-      this.dialogRef.close()
-    }
+    this.classesService.addClass(this.data.selectedSemester.id, this.className, this.teacherName, this.roomNumber);
+    this.dialogRef.close()
   }
 
 

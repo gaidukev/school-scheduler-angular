@@ -41,3 +41,13 @@ mat-dialog-content {
 mat-form-field {
     width: 65%;
 }
+
+#dialog-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#cancel-dialog-button {
+    margin: 5px;
+}

@@ -4,17 +4,33 @@ import {
   MatDialogClose,
   MatDialogContent,
   MatDialogTitle,
-  MatDialogRef
+  MatDialogRef,
+  MatDialogModule
 } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
 import { SemestersService } from '../../services/semesters.service';
 
 @Component({
   selector: 'app-add-semester-dialog',
   standalone: true,
-  imports: [    MatDialogTitle,
+  imports: [    
+    MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
-    MatDialogClose],
+    MatDialogClose,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatNativeDateModule,
+    FormsModule,
+    MatButtonModule
+  ],
   templateUrl: './add-semester-dialog.component.html',
   styleUrl: './add-semester-dialog.component.scss'
 })

@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed } from '@angular/core';
+import { Component, inject, signal, computed, Signal } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { ClassesService, Class } from '../../services/classes.service';
@@ -28,16 +28,19 @@ export class ClassListComponent {
   classes = this.classesService.classes;
   semesterOptions = this.semestersService.semesters;
 
-  selectedSemester = signal<number>(0);
+  selectedSemesterId = signal<number>(0);
 
   filteredClasses = computed(() => {
-    return this.classes().filter((el) => el.semesterId == this.selectedSemester())
+    return this.classes().filter((el) => el.semesterId == this.selectedSemesterId())
   })
 
   readonly dialog = inject(MatDialog);
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(AddClassDialogComponent, {data: {}, "minWidth": "50%" });
+  onAddClass(): void {
+    const dialogRef = this.dialog.open(AddClassDialogComponent, {data: {
+      "selectedSemester": this.semesterOptions().filter((el) => el.id == this.selectedSemesterId())[0]
+
+    }, "minWidth": "50%" });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log("The add class dialog was closed!");
