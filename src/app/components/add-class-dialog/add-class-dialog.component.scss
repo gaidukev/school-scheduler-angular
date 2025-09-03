@@ -72,3 +72,16 @@ mat-form-field {
 
     color: var(--text-alternate);
 }
+
+.time-input {
+    width: 100px;
+}
+
+#ampm-input {
+    width: 120px;
+}
+
+#time-inputs-container {
+    display: flex;
+    gap: 1em;
+}

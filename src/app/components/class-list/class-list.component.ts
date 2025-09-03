@@ -49,7 +49,7 @@ export class ClassListComponent {
 
   onAddSemester(): void {
 
-    const dialogRef = this.dialog.open(AddSemesterDialogComponent, {data: {}, "minWidth": "50%" });
+    const dialogRef = this.dialog.open(AddSemesterDialogComponent, {data: {}, "minWidth": "40%" });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log("The add semester dialog has been closed!")

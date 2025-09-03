@@ -53,9 +53,6 @@ export class AddClassDialogComponent {
 
   readonly data = inject(MAT_DIALOG_DATA) as { selectedSemester: Semester };
 
-  ngOnInit(): void {
-    console.log("Semester: ", JSON.stringify(this.data), JSON.stringify(this.data.selectedSemester));
-  }
 
   formatSemester(): String {
     return `${new Date(this.data.selectedSemester.dateFrom).toLocaleString('y MMM d')} - ${new Date(this.data.selectedSemester.dateTo).toLocaleString('y MMM d')}`
@@ -67,13 +64,14 @@ export class AddClassDialogComponent {
   className = "";
   teacherName = "";
   roomNumber = "";
+  startTimeFromMidnight = 0;
+  endTimeFromMidnight = 0;
 
   onNoClick(): void {
 
-    console.log("SEMESTER ID: ", this.data.selectedSemester.id)
-    
 
-    this.classesService.addClass(this.data.selectedSemester.id, this.className, this.teacherName, this.roomNumber);
+
+    this.classesService.addClass(this.data.selectedSemester.id, this.className, this.teacherName, this.roomNumber, this.startTimeFromMidnight, this.endTimeFromMidnight);
     this.dialogRef.close()
   }
 
