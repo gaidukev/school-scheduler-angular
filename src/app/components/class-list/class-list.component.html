@@ -20,16 +20,19 @@
           <div class="list-item class-info-container">
             <div class="class-info-large">
               <h2 class="list-item-title">{{className.name}}</h2> 
-              <p class="class-extra-data">{{className.teacher}} ● Room {{className.room}}</p>
+              <div class="class-extra-data">
+                <p>{{className.teacher}} ● Room {{className.room}}</p>
+                <p>{{className.startTimeFromMidnight | time}} - {{className.endTimeFromMidnight | time}}</p>
+              </div>
             </div>
-            <div class="class-info-icons">
+            <!-- <div class="class-info-icons">
               <mat-icon>
                 menu_book
               </mat-icon>
               <mat-icon>
                 grading
               </mat-icon>
-            </div>
+            </div> -->
           </div>
         </mat-list-item>
       }

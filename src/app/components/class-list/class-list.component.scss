@@ -88,13 +88,13 @@
 
 .class-extra-data {
     color: var(--text-muted);
+    margin-bottom: 0.5em;
 }
 
-// ::ng-deep .mat-mdc-list-item-unscoped-content.mdc-list-item__primary-text {
-//   display: flex;
-//   flex-direction: row;
-//   align-items: center;
-// }
+.class-extra-data > p {
+    margin: 0;
+}
+
 
 .semester-select {
     margin: 20px;
