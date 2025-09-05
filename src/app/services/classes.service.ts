@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { Time } from '../../../types/time';
 
 export type Class = {
   id: number,
@@ -56,21 +57,41 @@ export class ClassesService {
 
   classes = this.#classes.asReadonly();
 
-
-
-  addClass(semesterId: number, name: string, teacher: string, room: string, startTimeFromMidnight: number, endTimeFromMidnight: number){
+  addClass(semesterId: number, name: string, teacher: string, room: string, startTimeFromMidnight: Time|number, endTimeFromMidnight: Time|number): void {
     this.#classes.update((oldClasses) => {
       const newId = this.#classes().length;
-      return [...oldClasses, 
-        {
-          id: newId,
-          semesterId: semesterId,
-          name: name,
-          teacher: teacher,
-          room: room,
-          startTimeFromMidnight: startTimeFromMidnight,
-          endTimeFromMidnight: endTimeFromMidnight
-        }]
+
+      if (startTimeFromMidnight instanceof Time && endTimeFromMidnight instanceof Time) {
+        return [...oldClasses, 
+          {
+            id: newId,
+            semesterId: semesterId,
+            name: name,
+            teacher: teacher,
+            room: room,
+            startTimeFromMidnight: startTimeFromMidnight.timeToMinutes(),
+            endTimeFromMidnight: endTimeFromMidnight.timeToMinutes()
+          }
+        ]
+      } else if (typeof startTimeFromMidnight === 'number' && typeof endTimeFromMidnight === 'number') {
+        return [
+          ...oldClasses, 
+          {
+            id: newId,
+            semesterId: semesterId,
+            name: name,
+            teacher: teacher,
+            room: room, 
+            startTimeFromMidnight: startTimeFromMidnight,
+            endTimeFromMidnight: endTimeFromMidnight
+          }
+        ]
+      } else {
+        return []
+      }
     })
   }
+
+
+
 }

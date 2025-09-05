@@ -11,13 +11,13 @@
     <mat-dialog-content class="dialog-content" >
         <div class="form-container">
             <div class="field-input">
-                <p class="field-label">Class</p>
+                <p class="field-label">Class Name</p>
                 <mat-form-field appearance="outline">
                     <input matInput [(ngModel)]="className">
                 </mat-form-field>
             </div>
             <div class="field-input">
-                <p class="field-label">Teacher</p>
+                <p class="field-label">Instructor</p>
                 <mat-form-field appearance="outline">
                     <input matInput [(ngModel)]="teacherName">
                 </mat-form-field>
@@ -35,23 +35,46 @@
                 <div id="time-inputs-container">
                     <mat-form-field appearance="outline" class="time-input">
                         <mat-label>HH</mat-label>
-                        <input matInput />
+                        <input matInput [(ngModel)]="startTimeFromMidnight.hours"/>
                     </mat-form-field>
                     <mat-form-field appearance="outline" class="time-input">
                         <mat-label>MM</mat-label>
-                        <input matInput  />
+                        <input matInput [(ngModel)]="startTimeFromMidnight.minutes" />
                     </mat-form-field>
 
                     <mat-form-field id="ampm-input">
                         <mat-label>AM/PM</mat-label>
-                        <mat-select>
+                        <mat-select [(ngModel)]="startTimeFromMidnight.dayPeriod">
                             <mat-option value="AM">AM</mat-option>
                             <mat-option value="PM">PM</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
-
             </div>
+
+
+            <div class="field-input">
+                <p class="field-label">End Time</p>
+                <div id="time-inputs-container">
+                    <mat-form-field appearance="outline" class="time-input">
+                        <mat-label>HH</mat-label>
+                        <input matInput [(ngModel)]="endTimeFromMidnight.hours"/>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="time-input">
+                        <mat-label>MM</mat-label>
+                        <input matInput  [(ngModel)]="endTimeFromMidnight.minutes"/>
+                    </mat-form-field>
+
+                    <mat-form-field id="ampm-input">
+                        <mat-label>AM/PM</mat-label>
+                        <mat-select [(ngModel)]="endTimeFromMidnight.dayPeriod">
+                            <mat-option value="AM">AM</mat-option>
+                            <mat-option value="PM">PM</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
         </div>
 
     </mat-dialog-content>

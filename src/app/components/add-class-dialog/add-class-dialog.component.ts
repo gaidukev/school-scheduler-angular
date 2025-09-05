@@ -21,6 +21,7 @@ import { ClassesService } from '../../services/classes.service';
 import { DatePipe, CommonModule  } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Semester } from '../../services/semesters.service';
+import { Time } from '../../../../types/time';
 
 @Component({
   selector: 'app-add-class-dialog',
@@ -64,12 +65,11 @@ export class AddClassDialogComponent {
   className = "";
   teacherName = "";
   roomNumber = "";
-  startTimeFromMidnight = 0;
-  endTimeFromMidnight = 0;
+
+  startTimeFromMidnight: Time = new Time("0", "0", 'AM');
+  endTimeFromMidnight: Time = new Time("0", "0", 'AM');
 
   onNoClick(): void {
-
-
 
     this.classesService.addClass(this.data.selectedSemester.id, this.className, this.teacherName, this.roomNumber, this.startTimeFromMidnight, this.endTimeFromMidnight);
     this.dialogRef.close()
