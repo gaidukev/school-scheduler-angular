@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { Time } from '../../../types/time';
+import { Time } from '../classes/time';
 
 export type Class = {
   id: number,

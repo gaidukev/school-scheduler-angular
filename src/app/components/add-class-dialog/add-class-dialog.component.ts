@@ -1,7 +1,7 @@
 import { Component, inject, ChangeDetectionStrategy, signal } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
@@ -21,7 +21,7 @@ import { ClassesService } from '../../services/classes.service';
 import { DatePipe, CommonModule  } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Semester } from '../../services/semesters.service';
-import { Time } from '../../../../types/time';
+import { Time } from '../../classes/time';
 
 @Component({
   selector: 'app-add-class-dialog',

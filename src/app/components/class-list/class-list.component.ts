@@ -14,11 +14,12 @@ import { FormsModule } from '@angular/forms';
 import { DatePipe, CommonModule  } from '@angular/common';
 import { AddSemesterDialogComponent } from '../add-semester-dialog/add-semester-dialog.component';
 import { TimePipe } from '../../pipes/time.pipe';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-class-list',
   standalone: true,
-  imports: [MatButtonModule, MatListModule, MatIconModule, MatOption, MatSelect, MatFormFieldModule, MatInputModule, FormsModule, DatePipe, CommonModule, TimePipe],
+  imports: [MatButtonModule, MatListModule, MatIconModule, MatOption, MatSelect, MatFormFieldModule, MatInputModule, FormsModule, DatePipe, CommonModule, TimePipe, RouterLink],
   templateUrl: './class-list.component.html',
   styleUrl: './class-list.component.scss'
 })
