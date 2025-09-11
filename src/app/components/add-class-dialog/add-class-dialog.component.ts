@@ -1,7 +1,7 @@
-import { Component, inject, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, inject, Inject, ChangeDetectionStrategy, signal } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, FormGroup, NgForm, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
@@ -43,16 +43,94 @@ import { Time } from '../../classes/time';
     DatePipe,
     CommonModule,
     MatIconModule,
+    ReactiveFormsModule
 ],
   templateUrl: './add-class-dialog.component.html',
   styleUrl: './add-class-dialog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddClassDialogComponent {
-  readonly dialogRef = inject(MatDialogRef<AddClassDialogComponent>);
-  classesService = inject(ClassesService);
+  classForm: FormGroup;
+  constructor(
+    private fb: FormBuilder,
+    private dialogRef: MatDialogRef<AddClassDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public readonly data: { selectedSemester: Semester }
+  ) {
+    this.classForm = this.fb.group({
+      className: ['', [Validators.required]],
+      teacherName: ['', [Validators.required]],
+      roomNumber: ['', []],
+      startTime: this.fb.group({
+        hours: ['', [Validators.required, this.hourValidator]],
+        minutes: ['', [Validators.required, this.minuteValidator]],
+        dayPeriod: ['AM', Validators.required]
+      }),
+      endTime: this.fb.group({
+        hours: ['', [Validators.required, this.hourValidator]],
+        minutes: ['', [Validators.required, this.minuteValidator]],
+        dayPeriod: ['AM', Validators.required]
+      })
+  }, { validators: [this.endAfterStartValidator] });
+  }
 
-  readonly data = inject(MAT_DIALOG_DATA) as { selectedSemester: Semester };
+  hourValidator(control: AbstractControl): ValidationErrors | null {
+    return Time.isValidHours(control.value) ? null : { invalidHour: true };
+  }
+
+  minuteValidator(control: AbstractControl): ValidationErrors | null {
+    return Time.isValidMinutes(control.value) ? null : { invalidMinute: true };
+  }
+
+  extractTimes = (group: AbstractControl): [Time, Time] | null => {
+    const start = group.get('startTime')?.value;
+    const end = group.get('endTime')?.value;
+
+    if (!start || !end) return null;
+
+    const startTime = new Time(start.hours, start.minutes, start.dayPeriod);
+    const endTime = new Time(end.hours, end.minutes, end.dayPeriod);
+
+    return [startTime, endTime];
+
+  }
+
+  endAfterStartValidator = (group: AbstractControl): ValidationErrors | null => {
+
+    const errorReturn = {endBeforeStart: true};
+
+
+    const result = this.extractTimes(group);
+    if (result){
+      const [startTime, endTime] = result;
+      return Time.isLessThan(startTime, endTime) ? null : errorReturn;
+    } else {
+      return errorReturn;
+    }
+    
+  }
+
+  onSubmit() {
+    const className = this.classForm.get('className')?.value;
+    const teacherName = this.classForm.get('teachername')?.value;
+    const roomNumber = this.classForm.get('roomNumber')?.value;
+    const timesResult = this.extractTimes(this.classForm);
+
+    if (this.classForm.valid && timesResult && roomNumber && teacherName && className) {
+
+      const [startTime, endTime] = timesResult;
+      this.classesService.addClass(this.data.selectedSemester.id, className, teacherName, roomNumber, startTime, endTime);
+      this.dialogRef.close(this.classForm.value);
+
+    } else {
+      this.classForm.markAllAsTouched();
+    }
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  classesService = inject(ClassesService);
 
 
   formatSemester(): String {
@@ -68,12 +146,6 @@ export class AddClassDialogComponent {
 
   startTimeFromMidnight: Time = new Time("0", "0", 'AM');
   endTimeFromMidnight: Time = new Time("0", "0", 'AM');
-
-  onNoClick(): void {
-
-    this.classesService.addClass(this.data.selectedSemester.id, this.className, this.teacherName, this.roomNumber, this.startTimeFromMidnight, this.endTimeFromMidnight);
-    this.dialogRef.close()
-  }
 
 
 }

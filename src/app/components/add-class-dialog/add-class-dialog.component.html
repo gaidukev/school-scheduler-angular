@@ -9,42 +9,47 @@
 
     </div>
     <mat-dialog-content class="dialog-content" >
-        <div class="form-container">
+        <form [formGroup]="classForm" (ngSubmit)="onSubmit()" class="form-container">
             <div class="field-input">
                 <p class="field-label">Class Name</p>
                 <mat-form-field appearance="outline">
-                    <input matInput [(ngModel)]="className">
+                    <input matInput formControlName="className">
+                    <mat-error *ngIf="classForm.get('className')?.hasError('required')">Class name is required.</mat-error>
                 </mat-form-field>
             </div>
             <div class="field-input">
                 <p class="field-label">Instructor</p>
                 <mat-form-field appearance="outline">
-                    <input matInput [(ngModel)]="teacherName">
+                    <input matInput formControlName="teacherName">
+                    <mat-error *ngIf="classForm.get('teacherName')?.hasError('required')">Instructor is required.</mat-error>
                 </mat-form-field>
             </div>
             <div class="field-input">
                 <p class="field-label">Room</p>
                 <mat-form-field appearance="outline">
-                    <input matInput [(ngModel)]="roomNumber">
+                    <input matInput formControlName="roomNumber">
+                    <mat-error *ngIf="classForm.get('roomNumber')?.hasError('required')">Room number is required.</mat-error>
                 </mat-form-field>
             </div>
 
 
-            <div class="field-input">
+            <div class="field-input" formGroupName="startTime">
                 <p class="field-label">Start Time</p>
                 <div id="time-inputs-container">
                     <mat-form-field appearance="outline" class="time-input">
                         <mat-label>HH</mat-label>
-                        <input matInput [(ngModel)]="startTimeFromMidnight.hours"/>
+                        <input matInput formControlName="hours"/>
+                        <mat-error *ngIf="classForm.get('hours')?.hasError('invalidHour')">Invalid hours.</mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="outline" class="time-input">
                         <mat-label>MM</mat-label>
-                        <input matInput [(ngModel)]="startTimeFromMidnight.minutes" />
+                        <input matInput formControlName="minutes" />
+                        <mat-error *ngIf="classForm.get('minutes')?.hasError('invalidMinute')">Invalid minutes.</mat-error>
                     </mat-form-field>
 
-                    <mat-form-field id="ampm-input">
+                    <mat-form-field class="ampm-input">
                         <mat-label>AM/PM</mat-label>
-                        <mat-select [(ngModel)]="startTimeFromMidnight.dayPeriod">
+                        <mat-select formControlName="dayPeriod">
                             <mat-option value="AM">AM</mat-option>
                             <mat-option value="PM">PM</mat-option>
                         </mat-select>
@@ -53,29 +58,32 @@
             </div>
 
 
-            <div class="field-input">
+            <div class="field-input" formGroupName="endTime">
                 <p class="field-label">End Time</p>
                 <div id="time-inputs-container">
                     <mat-form-field appearance="outline" class="time-input">
                         <mat-label>HH</mat-label>
-                        <input matInput [(ngModel)]="endTimeFromMidnight.hours"/>
+                        <input matInput formControlName="hours"/>
+                        <mat-error *ngIf="classForm.get('hours')?.hasError('invalidHour')">Invalid hours.</mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="outline" class="time-input">
                         <mat-label>MM</mat-label>
-                        <input matInput  [(ngModel)]="endTimeFromMidnight.minutes"/>
+                        <input matInput  formControlName="minutes"/>
+                        <mat-error *ngIf="classForm.get('minutes')?.hasError('invalidMinute')">Invalid minutes.</mat-error>
                     </mat-form-field>
 
-                    <mat-form-field id="ampm-input">
+                    <mat-form-field class="ampm-input">
                         <mat-label>AM/PM</mat-label>
-                        <mat-select [(ngModel)]="endTimeFromMidnight.dayPeriod">
+                        <mat-select formControlName="dayPeriod">
                             <mat-option value="AM">AM</mat-option>
                             <mat-option value="PM">PM</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
             </div>
+            <mat-error *ngIf="classForm.hasError('endBeforeStart')">End time must be after start time.</mat-error>
 
-        </div>
+        </form>
 
     </mat-dialog-content>
     <mat-dialog-actions align="end">
