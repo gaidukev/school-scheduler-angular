@@ -58,6 +58,7 @@ export class ClassesService {
   classes = this.#classes.asReadonly();
 
   addClass(semesterId: number, name: string, teacher: string, room: string, startTimeFromMidnight: Time|number, endTimeFromMidnight: Time|number): void {
+    console.log("Inside of addClass!")
     this.#classes.update((oldClasses) => {
       const newId = this.#classes().length;
 

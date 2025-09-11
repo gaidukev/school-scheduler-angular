@@ -90,6 +90,8 @@ export class AddClassDialogComponent {
     const startTime = new Time(start.hours, start.minutes, start.dayPeriod);
     const endTime = new Time(end.hours, end.minutes, end.dayPeriod);
 
+
+    console.log("startTime: ", startTime.timeToMinutes(), "endTime: ", endTime.timeToMinutes())
     return [startTime, endTime];
 
   }
@@ -110,13 +112,17 @@ export class AddClassDialogComponent {
   }
 
   onSubmit() {
+    console.log("Inside of onsubmit!")
     const className = this.classForm.get('className')?.value;
-    const teacherName = this.classForm.get('teachername')?.value;
+    const teacherName = this.classForm.get('teacherName')?.value;
     const roomNumber = this.classForm.get('roomNumber')?.value;
     const timesResult = this.extractTimes(this.classForm);
 
+    console.log("Values: ", this.classForm.valid, timesResult, roomNumber, teacherName, className)
+
     if (this.classForm.valid && timesResult && roomNumber && teacherName && className) {
 
+      console.log("Inside of if statement!")
       const [startTime, endTime] = timesResult;
       this.classesService.addClass(this.data.selectedSemester.id, className, teacherName, roomNumber, startTime, endTime);
       this.dialogRef.close(this.classForm.value);

@@ -18,7 +18,7 @@ export class Time {
     }
 
     timeToMinutes(): number {
-        let h = Number(this.hours);
+        let h = Number(this.hours) % 12;
         let m = Number(this.minutes);
         if (this.dayPeriod == 'AM') {
             return h * 60 + m
