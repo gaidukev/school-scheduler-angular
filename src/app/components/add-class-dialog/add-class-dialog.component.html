@@ -94,7 +94,7 @@
                     <mat-checkbox formControlName="sunday">Sunday</mat-checkbox>
                 </div>
             </div>
-            <mat-error *ngIf="classForm.hasError('endBeforeStart')">End time must be after start time.</mat-error>
+            <mat-error *ngIf="classForm.hasError('endBeforeStart') && (classForm.get('startTime')?.touched || classForm.get('endTime')?.touched)">End time must be after start time.</mat-error>
 
         </form>
 
