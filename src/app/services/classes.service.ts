@@ -1,6 +1,20 @@
 import { Injectable, signal } from '@angular/core';
 import { Time } from '../classes/time';
 
+export type Day = "monday"|"tuesday"|"wednesday"|"thursday"|"friday"|"saturday"|"sunday";
+
+export type DayConfig = Record<Day, boolean>;
+
+export const dayMap = {
+  monday: "M",
+  tuesday: "T",
+  wednesday: "W",
+  thursday: "R",
+  friday: "F",
+  saturday: "S",
+  sunday: "U"
+}
+
 export type Class = {
   id: number,
   semesterId: number,
@@ -8,7 +22,8 @@ export type Class = {
   teacher: string,
   room: string,
   startTimeFromMidnight: number,
-  endTimeFromMidnight: number
+  endTimeFromMidnight: number,
+  days: DayConfig
 }
 
 @Injectable({
@@ -24,7 +39,16 @@ export class ClassesService {
       teacher: "Dr. Sarah Harbold",
       room: "401",
       startTimeFromMidnight: 720,
-      endTimeFromMidnight: 770
+      endTimeFromMidnight: 770,
+      days: {
+        "monday": true,
+        "tuesday": false,
+        "wednesday": true,
+        "thursday": true,
+        "friday": false,
+        "saturday": false,
+        "sunday": false
+      }
     },
     {
       id: 1,
@@ -33,7 +57,16 @@ export class ClassesService {
       teacher: "Dr. Katherine Olde",
       room: "105",
       startTimeFromMidnight: 540,
-      endTimeFromMidnight: 590
+      endTimeFromMidnight: 590,
+      days: {
+        "monday": true,
+        "tuesday": false,
+        "wednesday": false,
+        "thursday": false,
+        "friday": false,
+        "saturday": false,
+        "sunday": false
+      }
     },
     {
       id: 2,
@@ -42,7 +75,16 @@ export class ClassesService {
       teacher: "Dr. Thomas Palinkas",
       room: "106",
       startTimeFromMidnight: 480,
-      endTimeFromMidnight: 530
+      endTimeFromMidnight: 530,
+      days: {
+        "monday": false,
+        "tuesday": false,
+        "wednesday": false,
+        "thursday": false,
+        "friday": true,
+        "saturday": false,
+        "sunday": true
+      }
     },
     {
       id: 2,
@@ -51,16 +93,26 @@ export class ClassesService {
       teacher: "Dr. Thomas Palinkas",
       room: "106",
       startTimeFromMidnight: 660,
-      endTimeFromMidnight: 710
+      endTimeFromMidnight: 710,
+      days: {
+        "monday": false,
+        "tuesday": false,
+        "wednesday": false,
+        "thursday": true,
+        "friday": true,
+        "saturday": false,
+        "sunday": false
+      }
     }
   ]);
 
   classes = this.#classes.asReadonly();
 
-  addClass(semesterId: number, name: string, teacher: string, room: string, startTimeFromMidnight: Time|number, endTimeFromMidnight: Time|number): void {
+  addClass(semesterId: number, name: string, teacher: string, room: string, startTimeFromMidnight: Time|number, endTimeFromMidnight: Time|number, daysConfig: DayConfig): void {
     console.log("Inside of addClass!")
     this.#classes.update((oldClasses) => {
       const newId = this.#classes().length;
+
 
       if (startTimeFromMidnight instanceof Time && endTimeFromMidnight instanceof Time) {
         return [...oldClasses, 
@@ -71,7 +123,8 @@ export class ClassesService {
             teacher: teacher,
             room: room,
             startTimeFromMidnight: startTimeFromMidnight.timeToMinutes(),
-            endTimeFromMidnight: endTimeFromMidnight.timeToMinutes()
+            endTimeFromMidnight: endTimeFromMidnight.timeToMinutes(),
+            days: daysConfig
           }
         ]
       } else if (typeof startTimeFromMidnight === 'number' && typeof endTimeFromMidnight === 'number') {
@@ -84,7 +137,8 @@ export class ClassesService {
             teacher: teacher,
             room: room, 
             startTimeFromMidnight: startTimeFromMidnight,
-            endTimeFromMidnight: endTimeFromMidnight
+            endTimeFromMidnight: endTimeFromMidnight,
+            days: daysConfig
           }
         ]
       } else {

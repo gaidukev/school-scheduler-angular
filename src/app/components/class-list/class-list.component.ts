@@ -1,7 +1,7 @@
 import { Component, inject, signal, computed, Signal } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
-import { ClassesService, Class } from '../../services/classes.service';
+import { ClassesService, Class, DayConfig, dayMap } from '../../services/classes.service';
 import { SemestersService, Semester } from '../../services/semesters.service';
 import {MatDialog} from '@angular/material/dialog';
 import { AddClassDialogComponent } from '../add-class-dialog/add-class-dialog.component';
@@ -31,6 +31,17 @@ export class ClassListComponent {
   semesterOptions = this.semestersService.semesters;
 
   selectedSemesterId = signal<number>(0);
+
+  formatDays(days: DayConfig): string {
+    let initialString = "";
+    const yes = 
+      (Object.keys(days) as (keyof DayConfig)[])
+      .filter((day) => days[day])
+      .map((day) => dayMap[day])
+      .join("")
+
+    return yes;
+  }
 
   filteredClasses = computed(() => {
     return this.classes().filter((el) => el.semesterId == this.selectedSemesterId())
