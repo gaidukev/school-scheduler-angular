@@ -42,7 +42,12 @@
       <button mat-button class="list-button" extended (click)="onAddClass()">
         Add class
       </button>
-      <button mat-button class="list-button" routerLink="/timetable">
+      <button 
+        mat-button 
+        class="list-button" 
+        [routerLink]="['/timetable']"
+        [queryParams]="{ semesterId: selectedSemesterId() }"
+        >
         Print Timetable
       </button>
     </div>

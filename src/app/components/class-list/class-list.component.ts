@@ -44,7 +44,7 @@ export class ClassListComponent {
   }
 
   filteredClasses = computed(() => {
-    return this.classes().filter((el) => el.semesterId == this.selectedSemesterId())
+    return this.classesService.getClassesForSemester(this.selectedSemesterId());
   })
 
   readonly dialog = inject(MatDialog);

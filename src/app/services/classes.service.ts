@@ -108,6 +108,10 @@ export class ClassesService {
 
   classes = this.#classes.asReadonly();
 
+  getClassesForSemester(semesterId: number): Class[] {
+    return this.classes().filter(cls => cls.semesterId === semesterId);
+  }
+
   addClass(semesterId: number, name: string, teacher: string, room: string, startTimeFromMidnight: Time|number, endTimeFromMidnight: Time|number, daysConfig: DayConfig): void {
     console.log("Inside of addClass!")
     this.#classes.update((oldClasses) => {
