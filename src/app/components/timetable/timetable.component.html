@@ -8,16 +8,16 @@
             <th mat-header-cell *matHeaderCellDef>{{ day }}</th>
 
             <ng-container  >
-                <!-- <td rowspan="2" mat-cell *matCellDef="let slot">
-                    {{ slot }}
-
-                </td> -->
                 <td mat-cell  *matCellDef="let slot">
                     <ng-container *ngIf="getClassStartingAt(day, slot) as cls" >
-                        <div class="event-card" [ngClass]="timeToMinutes(slot) == cls.startTimeFromMidnight ? 
-                        'class-starting' : 
-                        (timeToMinutes(slot) <= cls.endTimeFromMidnight && cls.endTimeFromMidnight <= timeToMinutes(slot) + intervalMinutes ?  'class-ending' : 'class-continuing')
-                        ">
+                        <div 
+                            class="event-card" 
+                            [ngClass]="timeToMinutes(slot) == cls.startTimeFromMidnight ? 
+                            'class-starting' : 
+                                (timeToMinutes(slot) <= cls.endTimeFromMidnight && cls.endTimeFromMidnight <= timeToMinutes(slot) + intervalMinutes ?  'class-ending' : 'class-continuing')
+                                "
+                            [ngStyle]="{'background-color': getClassColor(cls)}"
+                                >
                             {{timeToMinutes(slot) == cls.startTimeFromMidnight ? cls.teacher  +  cls.room : ''}}
                             
                         </div>

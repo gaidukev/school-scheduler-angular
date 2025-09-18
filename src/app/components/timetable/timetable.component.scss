@@ -17,8 +17,16 @@
   height: 52px !important;
 }
 
-td {
-    border: none;
+// td {
+//     border: none;
+// }
+
+td, th {
+    border-right: 1px solid #cccccc;
+}
+
+td:last-child, th:last-child {
+    border-right: none;
 }
 
 tr {

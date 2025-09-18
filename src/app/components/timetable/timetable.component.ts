@@ -19,11 +19,30 @@ export class TimetableComponent {
     this.route.queryParamMap.subscribe(params => {
       const semesterId = Number(params.get('semesterId'));
       this.selectedSemester = semesterId;
-      this.sampleClasses = this.classesService.getClassesForSemester(this.selectedSemester);
+      this.displayClasses = this.classesService.getClassesForSemester(this.selectedSemester);
     });
   }
 
   days: Day[] = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+  classColors = [
+    '#1976D2',
+    '#388E3C',
+    '#FBC02D', 
+    '#D32F2F', 
+    '#7B1FA2', 
+    '#F57C00', 
+    '#0288D1', 
+    '#C2185B', 
+    '#00796B', 
+    '#FFA000',
+    '#455A64', 
+    '#8BC34A', 
+    '#E64A19', 
+    '#5D4037',
+    '#0097A7',
+    '#AFB42B', 
+  ];
+
   amHours = range(6, 6)
   intervalMinutes  = 30;
   minutesInHour = 60;
@@ -34,6 +53,11 @@ export class TimetableComponent {
   classesService = inject(ClassesService);
 
   selectedSemester = 0;
+
+  getClassColor(cls: Class): string {
+    const classIndex = this.displayClasses.findIndex(c => c.id === cls.id);
+    return this.classColors[classIndex % this.classColors.length];
+  }
 
   generateTimeSlots(intervalMinutes: number): string[] {
     const times: string[] = [];
@@ -53,11 +77,11 @@ export class TimetableComponent {
   timeSlots = this.generateTimeSlots(this.intervalMinutes);
   displayedColumns = ['time', ...this.days];
 
-  sampleClasses: Class[] = this.classesService.getClassesForSemester(this.selectedSemester);
+  displayClasses: Class[] = this.classesService.getClassesForSemester(this.selectedSemester);
 
   getClassStartingAt(day: Day, slot: string): Class | undefined {
     const slotMinutes = this.timeToMinutes(slot);
-    const match =  this.sampleClasses.find(c => 
+    const match =  this.displayClasses.find(c => 
       c.days[day] &&
       c.startTimeFromMidnight <= slotMinutes &&
       c.endTimeFromMidnight > slotMinutes
