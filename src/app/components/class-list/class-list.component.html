@@ -1,9 +1,14 @@
 <div class="content-container">
     <mat-form-field appearance="outline" class="semester-select">
       <mat-label>Select a semester</mat-label>
-      <mat-select  [(ngModel)]="selectedSemesterId" name="semester" panelClass="semester-select-panel">
-      <!-- <mat-option value=-1 disabled>-- Choose a semester --</mat-option> -->
-      <mat-option *ngFor="let sem of semesterOptions()" [value]="sem.id">
+      <mat-select  
+        (selectionChange)="validateSemesterSelection($event.value)"
+        [value]="selectedSemesterId()"
+        name="semester" 
+        panelClass="semester-select-panel">
+      <mat-option 
+        *ngFor="let sem of semesterOptions()" 
+        [value]="sem.id">
           {{ sem.dateFrom | date:'y MMM d' }} - {{ sem.dateTo | date:'y MMM d' }}
       </mat-option>
       <mat-option 
@@ -12,7 +17,6 @@
         id="add-semester-option">
         + Add semester
       </mat-option>
-
       </mat-select>
     </mat-form-field>
 
@@ -28,14 +32,6 @@
                 <p>{{formatDays(className.days)}} ● {{className.startTimeFromMidnight | time}} - {{className.endTimeFromMidnight | time}}</p>
               </div>
             </div>
-            <!-- <div class="class-info-icons">
-              <mat-icon>
-                menu_book
-              </mat-icon>
-              <mat-icon>
-                grading
-              </mat-icon>
-            </div> -->
           </div>
         </mat-list-item>
       }
@@ -49,8 +45,7 @@
         mat-button 
         class="list-button" 
         [routerLink]="['/timetable']"
-        [queryParams]="{ semesterId: selectedSemesterId() }"
-        >
+        [queryParams]="{ semesterId: selectedSemesterId() }">
         Print Timetable
       </button>
     </div>

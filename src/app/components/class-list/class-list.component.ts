@@ -16,6 +16,8 @@ import { AddSemesterDialogComponent } from '../add-semester-dialog/add-semester-
 import { TimePipe } from '../../pipes/time.pipe';
 import { RouterLink } from "@angular/router";
 
+type NumericString = `${number}`;
+
 @Component({
   selector: 'app-class-list',
   standalone: true,
@@ -50,6 +52,12 @@ export class ClassListComponent {
   })
 
   readonly dialog = inject(MatDialog);
+
+  validateSemesterSelection(value: NumericString) {
+    if (value !== this.addSemesterValue) {
+      this.selectedSemesterId.set(Number(value));
+    }
+  }
 
   onAddClass(): void {
     const dialogRef = this.dialog.open(AddClassDialogComponent, {data: {
