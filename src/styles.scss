@@ -281,6 +281,23 @@ $dark-cyberpunk-theme: mat.define-dark-theme((
 ));
 
 
+.semester-select-panel #add-semester-option {
+    color: var(--text-alternate);
+
+    border-top: 2px solid var(--accent-secondary);
+    margin-top: 4px;
+    padding-bottom: 8px;
+}
+
+.semester-select-panel {
+  padding-bottom: 0 !important;
+}
+
+.semester-select-panel #add-semester-option:hover {
+  background-color: var(--surface-hover-color) !important;
+}
+
+
 .theme-light-warm {
   @include mat.all-component-colors($light-warm-theme);
 }

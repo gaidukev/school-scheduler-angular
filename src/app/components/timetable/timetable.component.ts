@@ -4,6 +4,7 @@ import { MatTableModule } from '@angular/material/table';
 import { range, timeInterval } from 'rxjs';
 import { Class, ClassesService, Day } from '../../services/classes.service';
 import { ActivatedRoute } from '@angular/router';
+import { Time } from '../../classes/time';
 
 @Component({
   selector: 'app-timetable',
@@ -59,8 +60,10 @@ export class TimetableComponent {
     return this.classColors[classIndex % this.classColors.length];
   }
 
-  generateTimeSlots(intervalMinutes: number): string[] {
-    const times: string[] = [];
+  generateTimeSlots(intervalMinutes: number): Time[] {
+    const times: Time[] = [];
+
+
     const startMinutes =  this.morningStartHour * this.minutesInHour; // minutes since midnight
     const endMinutes = this.eveningEndHour * this.minutesInHour; // minutes since midnight
     for (let mins = startMinutes; mins <= endMinutes; mins += intervalMinutes) {
@@ -68,7 +71,9 @@ export class TimetableComponent {
       const minutes = mins % this.minutesInHour;
       const hours12 = hours24 % this.halfDayHours === 0 ? this.halfDayHours : hours24 % this.halfDayHours;
       const ampm = hours24 < this.halfDayHours ? 'AM' : 'PM';
-      times.push(`${hours12}:${minutes.toString().padStart(2, '0')} ${ampm}`)
+
+      const newTime = new Time(String(hours12), String(minutes).padStart(2, "0"), ampm);
+      times.push(newTime);
     }
 
     return times;
@@ -79,27 +84,17 @@ export class TimetableComponent {
 
   displayClasses: Class[] = this.classesService.getClassesForSemester(this.selectedSemester);
 
-  getClassStartingAt(day: Day, slot: string): Class | undefined {
-    const slotMinutes = this.timeToMinutes(slot);
+  getClassStartingAt(day: Day, slot: Time): Class | undefined {
+    const slotMinutes = slot.timeToMinutes();
     const match =  this.displayClasses.find(c => 
       c.days[day] &&
       c.startTimeFromMidnight <= slotMinutes &&
       c.endTimeFromMidnight > slotMinutes
     )
 
-    console.log("matching class, end Time: ", match?.endTimeFromMidnight);
-
     return match;
   }
-  
 
-  timeToMinutes(label: string): number {
-    const [time, period] = label.split(' ');
-    let [hours, minutes] = time.split(':').map(Number);
-    if (period === 'PM' && hours !== 12) hours += 12;
-    if (period === 'AM' && hours === 12) hours = 0;
-    return hours * 60 + minutes;
-  }
 
   getRowSpan(cls: Class, timeInterval: number): number {
     if (!cls) return 1;

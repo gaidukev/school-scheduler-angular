@@ -28,5 +28,9 @@ export class Time {
 
 
     }
+
+    display(): string {
+        return `${this.hours}:${this.minutes} ${this.dayPeriod}`;
+    }
 }
 

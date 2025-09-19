@@ -24,6 +24,8 @@ import { RouterLink } from "@angular/router";
   styleUrl: './class-list.component.scss'
 })
 export class ClassListComponent {
+
+  addSemesterValue = 'add';
   
   classesService = inject(ClassesService);
   semestersService = inject(SemestersService);
@@ -61,12 +63,16 @@ export class ClassListComponent {
   }
 
   onAddSemester(): void {
+    if (String(this.selectedSemesterId()) != this.addSemesterValue) {
+      console.log("selected semester id: " + this.selectedSemesterId());
 
-    const dialogRef = this.dialog.open(AddSemesterDialogComponent, {data: {}, "minWidth": "40%" });
+      const dialogRef = this.dialog.open(AddSemesterDialogComponent, {data: {}, "minWidth": "40%" });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log("The add semester dialog has been closed!")
-    })
+      dialogRef.afterClosed().subscribe(result => {
+        console.log("The add semester dialog has been closed!")
+      })
+    }
+
   }
 
 }

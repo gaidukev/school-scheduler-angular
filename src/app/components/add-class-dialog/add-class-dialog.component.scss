@@ -73,15 +73,18 @@ mat-form-field {
     color: var(--text-alternate);
 }
 
-.time-input {
-    width: 100px;
-}
-
-#ampm-input {
+#ampm-input, .time-input {
     width: 120px;
 }
 
 #time-inputs-container {
     display: flex;
     gap: 1em;
+}
+
+#day-checkbox-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    flex-direction: column;
 }

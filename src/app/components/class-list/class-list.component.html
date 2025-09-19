@@ -1,12 +1,15 @@
 <div class="content-container">
     <mat-form-field appearance="outline" class="semester-select">
       <mat-label>Select a semester</mat-label>
-      <mat-select  [(ngModel)]="selectedSemesterId" name="semester">
+      <mat-select  [(ngModel)]="selectedSemesterId" name="semester" panelClass="semester-select-panel">
       <!-- <mat-option value=-1 disabled>-- Choose a semester --</mat-option> -->
       <mat-option *ngFor="let sem of semesterOptions()" [value]="sem.id">
           {{ sem.dateFrom | date:'y MMM d' }} - {{ sem.dateTo | date:'y MMM d' }}
       </mat-option>
-      <mat-option value="add" (onSelectionChange)="onAddSemester()">
+      <mat-option 
+        [value]="addSemesterValue" 
+        (onSelectionChange)="onAddSemester()"
+        id="add-semester-option">
         + Add semester
       </mat-option>
 
